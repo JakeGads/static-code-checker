@@ -45,9 +45,9 @@ def compile_java(file):
     if ".java" in file:
         os.system(f"javac {file}")
         file = file.replace(".java", ".class")
-    
-    process = subprocess.Popen(["java", file, *args], stdout=subprocess.PIPE)
-    output = process.communicate()[0]
+    for arg in args:
+        process = subprocess.Popen(["java", file, arg], stdout=subprocess.PIPE)
+        output += "\n\n" + process.communicate()[0]
             
 
     return output
